@@ -1005,62 +1005,76 @@ section { padding: var(--section-py) 0; }
 }
 
 /* ==========================================================================
-   Mobile polish
+   Mobile polish — aggressive overrides (high specificity)
    ========================================================================== */
 
 /* Tablet and below */
 @media (max-width: 900px) {
-  .topbar-inner { font-size: .74rem; }
-  .topbar-right { gap: 1rem; }
-  /* Hide the big phone link in the header on mobile — float-call button covers it */
-  .header-cta .phone-link { display: none; }
-  .header-cta { gap: .5rem; }
-  .site-header-inner { padding: .85rem 0; }
-  .brand { font-size: 1.15rem; }
-  .brand-mark { width: 38px; height: 38px; font-size: .9rem; }
+  .site-header .header-cta .phone-link { display: none !important; }
+  .site-header .header-cta { gap: .5rem; }
+  .site-header .site-header-inner { padding: .85rem 0; }
+  .site-header .brand { font-size: 1.15rem; }
+  .site-header .brand-mark { width: 38px; height: 38px; font-size: .9rem; }
 }
 
 /* Phones */
 @media (max-width: 640px) {
   :root { --section-py: clamp(3rem, 9vw, 5rem); }
 
-  /* Topbar: only show phone + email, drop the service area list */
-  .topbar-inner > div:first-child { display: none; }
-  .topbar-inner { justify-content: center; }
-  .topbar-right { justify-content: center; flex-wrap: wrap; }
+  /* --- Topbar: hide entirely on phones. Float-call + hamburger cover it. --- */
+  body > .topbar { display: none !important; }
 
-  /* Header: smaller book-a-call, ensure no overflow */
-  .header-cta .btn { padding: .7rem 1.1rem; font-size: .85rem; }
+  /* --- Header: brand + hamburger only --- */
+  .site-header .header-cta .btn-gold { display: none !important; }
+  .site-header .brand { max-width: calc(100vw - 90px); overflow: hidden; }
+  .site-header .brand-text { overflow: hidden; }
+  .site-header .brand-text small {
+    font-size: .6rem;
+    letter-spacing: .1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-  /* Hero */
-  .hero { min-height: min(82vh, 680px); }
-  .hero-inner { padding: 5rem 0 4rem; }
-  .hero h1 { font-size: clamp(2.1rem, 8vw, 3rem); }
-  .hero-sub { font-size: 1rem; }
-  .hero-cta { flex-direction: column; align-items: stretch; }
-  .hero-cta .btn { width: 100%; justify-content: center; }
-  .hero-meta {
-    position: static;
+  /* --- Hero --- */
+  .hero { min-height: 88vh; }
+  .hero .hero-inner { padding: 4rem 0 5rem; }
+  .hero h1 {
+    font-size: 2.25rem !important;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .hero h1 em { display: inline; }
+  .hero .eyebrow { font-size: .65rem; letter-spacing: .16em; }
+  .hero .hero-sub { font-size: .98rem; line-height: 1.55; margin-bottom: 1.5rem; }
+  .hero .hero-cta { flex-direction: column; align-items: stretch; gap: .6rem; }
+  .hero .hero-cta .btn { width: 100%; justify-content: center; padding: 1rem 1.4rem; }
+  /* Make the outline button readable against the busy hero image */
+  .hero .hero-cta .btn-outline-light {
+    background: rgba(11, 31, 58, 0.35);
+    border-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  /* Hero-meta: flat band below hero content, no decorative dashes */
+  .hero .hero-meta {
+    position: static !important;
     flex-direction: column;
     align-items: flex-start;
     gap: .5rem;
     padding: 1.25rem var(--gutter) 1.5rem;
-    background: rgba(0,0,0,.2);
-    font-size: .7rem;
+    background: rgba(0, 0, 0, 0.35);
+    font-size: .68rem;
     letter-spacing: .15em;
+    margin: 0 calc(-1 * var(--gutter));
   }
-  .hero-meta span::before,
-  .hero-meta-exp::before { content: ""; margin: 0; }
-  .hero-meta-exp { flex-wrap: wrap; }
+  .hero .hero-meta span::before,
+  .hero .hero-meta .hero-meta-exp::before { content: "" !important; margin: 0 !important; }
+  .hero .hero-meta .hero-meta-exp { flex-wrap: wrap; }
 
-  /* Value strip: remove negative top-pull so it doesn't collide with bottom of hero */
-  .value-strip {
-    margin-top: 0 !important;
-    padding: 2rem;
-    gap: 1.75rem;
-    box-shadow: var(--shadow-sm);
-  }
-  .container > .value-strip { margin-top: 0; }
+  /* --- Value strip: sit below hero flush, not overlapping --- */
+  .value-strip { margin-top: 0 !important; padding: 2rem; gap: 1.75rem; box-shadow: var(--shadow-sm); }
 
   /* Section layout inside containers that used inline flex space-between */
   .section-header[style*="space-between"] {
