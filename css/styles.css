@@ -1003,3 +1003,168 @@ section { padding: var(--section-py) 0; }
   .reveal { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
 }
+
+/* ==========================================================================
+   Mobile polish
+   ========================================================================== */
+
+/* Tablet and below */
+@media (max-width: 900px) {
+  .topbar-inner { font-size: .74rem; }
+  .topbar-right { gap: 1rem; }
+  /* Hide the big phone link in the header on mobile — float-call button covers it */
+  .header-cta .phone-link { display: none; }
+  .header-cta { gap: .5rem; }
+  .site-header-inner { padding: .85rem 0; }
+  .brand { font-size: 1.15rem; }
+  .brand-mark { width: 38px; height: 38px; font-size: .9rem; }
+}
+
+/* Phones */
+@media (max-width: 640px) {
+  :root { --section-py: clamp(3rem, 9vw, 5rem); }
+
+  /* Topbar: only show phone + email, drop the service area list */
+  .topbar-inner > div:first-child { display: none; }
+  .topbar-inner { justify-content: center; }
+  .topbar-right { justify-content: center; flex-wrap: wrap; }
+
+  /* Header: smaller book-a-call, ensure no overflow */
+  .header-cta .btn { padding: .7rem 1.1rem; font-size: .85rem; }
+
+  /* Hero */
+  .hero { min-height: min(82vh, 680px); }
+  .hero-inner { padding: 5rem 0 4rem; }
+  .hero h1 { font-size: clamp(2.1rem, 8vw, 3rem); }
+  .hero-sub { font-size: 1rem; }
+  .hero-cta { flex-direction: column; align-items: stretch; }
+  .hero-cta .btn { width: 100%; justify-content: center; }
+  .hero-meta {
+    position: static;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .5rem;
+    padding: 1.25rem var(--gutter) 1.5rem;
+    background: rgba(0,0,0,.2);
+    font-size: .7rem;
+    letter-spacing: .15em;
+  }
+  .hero-meta span::before,
+  .hero-meta-exp::before { content: ""; margin: 0; }
+  .hero-meta-exp { flex-wrap: wrap; }
+
+  /* Value strip: remove negative top-pull so it doesn't collide with bottom of hero */
+  .value-strip {
+    margin-top: 0 !important;
+    padding: 2rem;
+    gap: 1.75rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .container > .value-strip { margin-top: 0; }
+
+  /* Section layout inside containers that used inline flex space-between */
+  .section-header[style*="space-between"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  /* Path cards shorter on mobile */
+  .path-card { min-height: 280px; padding: 2.25rem 1.75rem; }
+  .path-card h3 { font-size: 1.5rem; }
+  .path-card .num { font-size: 2.4rem; }
+
+  /* About photo frame — remove decorative offset border on mobile (it bleeds) */
+  .about-photo-frame::before { display: none; }
+  .about-photo { aspect-ratio: 4 / 5; max-width: 380px; margin: 0 auto; }
+
+  /* About stats — allow wrapping */
+  .about-stats { grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+  .about-stats .stat strong { font-size: 1.6rem; }
+  .about-stats .stat span { font-size: .65rem; }
+
+  /* Listing/hood cards */
+  .listing-price { font-size: 1.4rem; }
+  .listing-body { padding: 1.3rem 1.3rem 1.5rem; }
+  .hood-card { aspect-ratio: 5 / 4; padding: 1.4rem; }
+  .hood-card h3 { font-size: 1.25rem; }
+
+  /* Testimonials */
+  .testimonial { padding: 1.75rem 1.5rem; }
+  .testimonial p { font-size: 1rem; }
+
+  /* FAQ */
+  .faq-item summary { font-size: 1.05rem; }
+  .faq-item { padding: 1.1rem 0; }
+
+  /* Forms: radio-pill grid should flex down */
+  .radio-group { grid-template-columns: repeat(2, 1fr); gap: .5rem; }
+  .radio-pill span { padding: .75rem .6rem; font-size: .85rem; }
+
+  /* Buttons stretch to full-width in CTA clusters */
+  .btn { padding: .9rem 1.4rem; font-size: .9rem; }
+  .page-hero div[style*="justify-content: center"] .btn { width: 100%; }
+  .page-hero div[style*="justify-content: center"] { flex-direction: column; }
+
+  /* Steps grid — single column feels more purposeful on phone */
+  .steps { grid-template-columns: 1fr; gap: 1rem; }
+  .step { padding: 1.5rem; }
+
+  /* Contact info items */
+  .contact-item h4 { font-size: 1rem; }
+  .contact-item p { font-size: .88rem; }
+
+  /* Footer tightened */
+  .site-footer { padding-top: 3.5rem; font-size: .85rem; }
+  .footer-grid { gap: 1.75rem; margin-bottom: 2.5rem; }
+  .site-footer h5 { margin-bottom: .8rem; }
+  .footer-brand p { font-size: .85rem; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: .6rem; }
+  .footer-disclaimer { font-size: .7rem; }
+
+  /* Float call button — keep above fold but respect safe areas */
+  .float-call {
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    right: 1rem;
+    width: 52px; height: 52px;
+  }
+
+  /* Page hero (subpages) */
+  .page-hero { padding: 5.5rem 0 4rem; }
+  .page-hero h1 { font-size: clamp(2rem, 7vw, 2.75rem); }
+  .page-hero p { font-size: 1rem; }
+
+  /* Address & long strings don't overflow */
+  .contact-item p { word-break: break-word; }
+
+  /* eXp badge in footer — compact */
+  .exp-badge { padding: .55rem .8rem; font-size: .68rem; gap: .6rem; }
+  .exp-badge .exp-logo { height: 28px; }
+
+  /* Split sections stack with extra breathing room */
+  .split { gap: 2.5rem; }
+}
+
+/* Small phones (≤400px) */
+@media (max-width: 400px) {
+  :root { --gutter: 1.1rem; }
+  .brand-text small { font-size: .62rem; letter-spacing: .14em; }
+  .brand { gap: .6rem; font-size: 1.05rem; }
+  .brand-mark { width: 34px; height: 34px; font-size: .8rem; }
+  .header-cta .btn { padding: .6rem .9rem; font-size: .8rem; }
+  .hero h1 { font-size: 2rem; }
+  .page-hero h1 { font-size: 1.85rem; }
+  .radio-group { grid-template-columns: 1fr 1fr; }
+}
+
+/* Fix for inline-styled "margin-top: calc(-1 * var(--section-py))" on value-strip
+   When the calc resolves negative, on mobile we want it to sit flush */
+@media (max-width: 640px) {
+  .container[style*="margin-top: calc(-1"] { margin-top: 1.5rem !important; }
+}
+
+/* Ensure tap targets meet 44×44 */
+.btn, .phone-link, .primary-nav a, .topbar a, .footer-bottom a, .float-call {
+  min-height: 36px;
+}
+.radio-pill, .faq-item summary { min-height: 44px; display: flex; align-items: center; }
+.faq-item summary { justify-content: space-between; }
