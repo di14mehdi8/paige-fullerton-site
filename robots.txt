@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# AI / Answer engines welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+Sitemap: https://di14mehdi8.github.io/paige-fullerton-site/sitemap.xml
